@@ -1,0 +1,13 @@
+{
+    "name": "studioatual/image-upload",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Studio Atual",
+            "email": "contato@studioatual.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.11"
+    }
+}
