@@ -33,3 +33,48 @@ $app->post('/upload', function (Request $request, Response $response) {
         return $response->withJson('no file', 400);
     }
 });
+
+$app->group('/images', function () {
+    $this->get('[/]', function ($request, $response) {
+        $images = [];
+        $folder = __DIR__ . '/../public/db/images';
+        if ($handle = opendir($folder)) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    $images[] = "http://image-upload.test/db/images/" . $entry;
+                }
+            }
+            closedir($handle);
+        }
+        return $response->withJson(['result' => $images], 200);
+    });
+
+    $this->post('/destroy', function ($request, $response) {
+        $params = $request->getParams();
+        if (!isset($params['file'])) {
+            return $response->withJson(["result" => "no file"], 400);
+        }
+        $folder = __DIR__ . '/../public/db/images';
+        if (is_file($folder . '/' . $params['file'])) {
+            if (unlink($folder . '/' . $params['file'])) {
+                return $response->withJson(["result" => "ok"], 200);
+            }
+            return $response->withJson(["result" => "can't delete"], 400);
+        }
+        return $response->withJson(["result" => "no exists"], 400);
+    });
+    
+    $this->post('/upload', function ($request, $response) {
+        $folder = __DIR__ . '/../public/db/images';
+        if ($_FILES) {
+            $filename = sha1($_FILES['file']['name']) . '.' . pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], $folder . "/" . $filename)) {
+                return $response->withJson(["result" => "http://image-upload.test/db/images/" . $filename], 200);
+            } else {
+                return $response->withJson(["result" => "error"], 400);
+            }
+        } else {
+            return $response->withJson(["result" => 'no file'], 400);
+        }
+    });
+});

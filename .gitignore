@@ -1,2 +1,4 @@
 vendor
 composer.lock
+public/db/images
+storage
