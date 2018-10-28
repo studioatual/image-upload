@@ -1,4 +1,5 @@
 vendor
 composer.lock
 public/db/images
+public/db/test
 storage

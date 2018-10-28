@@ -34,6 +34,25 @@ $app->post('/upload', function (Request $request, Response $response) {
     }
 });
 
+$app->group('/test', function () {
+    $this->get('[/]', function ($request, $response) {
+        return $response->withJson([
+            ['id' => 1, 'file' => 'aca8adfsd3e4c3cd8sadfds5d49c3gfhdf17afhg.jpeg', 'pos' => 1],
+            ['id' => 2, 'file' => 'safklhasdre1242344323e628c098437cf17a1as.jpeg', 'pos' => 2],
+            ['id' => 3, 'file' => '3cb7a8a3e4c3cd85d49c3e628c098437cf17a1ca.jpeg', 'pos' => 3],
+            ['id' => 4, 'file' => '3cb7a8adfas3e4c3cdgjrt85d4098437cf17a135.jpeg', 'pos' => 4],
+            ['id' => 5, 'file' => '3cb7a8a3e4c3cd85d49c3e628c3sadg7cf171dsf.jpg', 'pos' => 5],
+            ['id' => 6, 'file' => '3cb7a8a3e4c3casdfadsd85d4937csadff17a182.jpg', 'pos' => 6],
+            ['id' => 7, 'file' => '3cb7a8a3e4c3cd85d49asdfsadc3e628c0984382.jpg', 'pos' => 7],
+            ['id' => 8, 'file' => '3cb7a8a3e4asdfsc3cd85d49c3e628c098437c82.jpg', 'pos' => 8],
+            ['id' => 9, 'file' => 'asf3ew4413cb7a8a3e4c3cdasdfsadfwq85d492a.jpg', 'pos' => 9],
+            ['id' => 10, 'file' => '3cb7a8a3eas3324c3cd85d49c3e628c098437cfa.jpg', 'pos' => 10],
+            ['id' => 11, 'file' => '3cb7a8a3e4c3cddsfa23sdydt85d49c3e628c09x.jpg', 'pos' => 11],
+            ['id' => 12, 'file' => 'dfasd3cb7a8a3e4c3cd85d49ahc3e628c098437m.jpg', 'pos' => 12]
+        ], 200);
+    });
+});
+
 $app->group('/images', function () {
     $this->get('[/]', function ($request, $response) {
         $images = [];
